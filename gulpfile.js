@@ -84,7 +84,7 @@ for (var j = 0; j < sprites.length; ++j) {
           imgPath: '../img/sprites/' + sprite_name + '.png'
         }));
 
-    sprite_data.img.pipe(gulp.dest(images_output));
+    sprite_data.img.pipe(gulp.dest(images_output + '/sprites'));
     sprite_data.css.pipe(gulp.dest(styles_input));
   });
 }
@@ -110,5 +110,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', function() {
-  gulp.start('html', 'sass', 'raw_css', 'js', 'sprites', 'images', 'watch');
+  gulp.start('html', 'sprites', 'images', 'sass', 'raw_css', 'js', 'watch');
 });
