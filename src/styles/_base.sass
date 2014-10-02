@@ -1,0 +1,214 @@
+$ie-support-min: 8
+
+p, h1, h2, h3, h4, h5, h6
+  margin: 0
+
+=semantic-list
+  margin: 0
+  padding: 0
+  list-style: none
+
+.sl
+  +semantic-list
+
+.nowrap
+  white-space: nowrap
+
+a
+  color: inherit
+
+*, *:before, *:after
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
+em
+  font-style: normal
+
+figure
+  margin: 0
+
+=clr
+  &:after
+    content: ""
+    height: 0
+    display: table
+    clear: both
+
+  @if $ie-support-min <= 7
+    *zoom: 1
+
+$font-weight-light: 200
+$font-weight-semibold: 600
+
+
+/************************************************************
+/** experimental
+/************************************************************/
+
+$weird-big-value: -99999px
+
+=size($width, $height:equal)
+  width: $width
+  @if $height != equal
+    height: $height
+  @else
+    height: $width
+
+=triangle($width, $height, $color, $direction, $background:transparent)
+  +size(0)
+
+  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left)
+    $width: $width / 2
+
+    @if $direction == up
+      border-left: $width solid $background
+      border-right: $width solid $background
+      border-bottom: $height solid $color
+
+    @else if $direction == right
+      border-top: $width solid $background
+      border-bottom: $width solid $background
+      border-left: $height solid $color
+
+    @else if $direction == down
+      border-left: $width solid $background
+      border-right: $width solid $background
+      border-top: $height solid $color
+
+    @else if $direction == left
+      border-top: $width solid $background
+      border-bottom: $width solid $background
+      border-right: $height solid $color
+
+  @else if ($direction == up-right) or ($direction == up-left)
+    border-top: $height solid $color
+
+    @if $direction == up-right
+      border-left:  $width solid $background
+
+    @else if $direction == up-left
+      border-right: $width solid $background
+
+  @else if ($direction == down-right) or ($direction == down-left)
+    border-bottom: $height solid $color
+
+    @if $direction == down-right
+      border-left:  $width solid $background
+
+    @else if $direction == down-left
+      border-right: $width solid $background
+
+=fixed-centered($width)
+  width: $width
+  margin-left: auto
+  margin-right: auto
+
+=themed-input
+  border: 0
+  padding: 0
+  outline: none
+
+=themed-button
+  border: 0
+  padding: 0
+
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
+
+=pinned-button($height)
+  position: absolute
+  top: 50%
+  margin-top: -($height / 2)
+
+=placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+=hide-text
+  direction: ltr
+  text-indent: -9999px
+
+=hide-by-pos
+  position: absolute
+  left: $weird-big-value
+
+//
+  requires the following html markup to work:
+  <label>
+    <input type="checkbox">
+    <span class="checkbox-label">
+      Checkbox
+    </span>
+  </label>
+
+  and sass will be:
+  input[type=checkbox]
+    +styled-check
+      color: blue
+
+    +styled-check-checked
+      color: red
+
+  does not work on IE8, as checked pseudoclass is not supported here. Use class, added in javascript
+  to emulate it.
+
+=styled-check($label-class: "*")
+  +hide-by-pos
+
+  & + #{$label-class}
+    @content
+
+=styled-check-checked($label-class: "*")
+  &:checked + #{$label-class}
+    @content
+
+  @if $ie-support-min <= 8
+    &.checked + #{$label-class}
+      @content
+
+=inline-block
+  @if $ie-support-min <= 7
+    *zoom: 1
+    *display: inline
+  display: inline-block
+
+=justify-fix
+  &:after
+    content: ""
+    display: inline-block
+    +size(100%, 0)
+    visibility: hidden
+
+=pos-absolute($left:null, $top:null, $right:null, $bottom:null)
+  position: absolute
+  @if $left != null
+    left: $left
+  @if $top != null
+    top: $top
+  @if $right != null
+    right: $right
+  @if $bottom != null
+    bottom: $bottom
+
+=position-absolute($left:null, $top:null, $right:null, $bottom:null)
+  +pos-absolute($left, $top, $right, $bottom)
+
+=opacity($value)
+  @if $ie-support-min <= 8
+    @if $value == 1
+      filter: unquote("progid:DXImageTransform.Microsoft.Alpha(enabled=false)")
+    @else
+      filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($value * 100)})")
+  opacity: $value
+
+=hover-underline
+  &:hover, &:focus
+    text-decoration: underline
+
+=circle
+  border-radius: 50%

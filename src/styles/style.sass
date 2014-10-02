@@ -1,0 +1,1181 @@
+@import base
+@import sprites/sprite
+
+$brand-color: #4b75a5
+
+/*
+  fonts
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic)
+
+$font-opensans: 'Open Sans', sans-serif
+
+html, body
+  background: #efefef
+
+body
+  font-size: 16px
+  font-family: $font-opensans
+  height: 100%
+  min-width: 900px
+
+body
+  &:after
+    content: ""
+    position: fixed
+    top: 0
+    z-index: -1
+    width: 200px
+    height: 100%
+    background: #355d8a
+
+@media (max-width: 1400px)
+  body:after
+    left: 0
+
+@media (min-width: 1399px)
+  body:after
+    left: 50%
+    margin-left: -700px
+
+/*
+  global styles
+
+a
+  text-decoration: none
+
+/*
+  metabox (comments, reposts and likes)
+
+.comments, .reposts, .likes
+  .icon
+    display: inline-block
+    margin-right: 7px
+
+  color: #d1d1d1
+
+.comments
+  .icon
+    +sprite($icon-comments)
+
+  &:hover, &.active
+    color: #4b75a5
+    .icon
+      +sprite($icon-comments-active)
+
+.reposts
+  &:before, &:after
+    content: ""
+    display: inline-block
+    width: 1px
+    height: 1em
+    background: lightgray
+    margin: 0 10px
+    vertical-align: -2px
+
+  .icon
+    +sprite($icon-reposts)
+
+  &:hover, &.active
+    color: #4b75a5
+    .icon
+      +sprite($icon-reposts-active)
+
+.likes
+  .icon
+    +sprite($icon-likes)
+
+  &:hover, &.active
+    color: #4b75a5
+    .icon
+      +sprite($icon-likes-active)
+
+.metabox
+  +clr
+  padding: 20px 0
+
+  .comments
+    float: left
+
+.metabox-right
+  float: right
+
+/*
+  container
+
+.site-container
+  max-width: 1400px
+  margin: 0 auto
+
+/*
+  top menu
+
+.top-menu-container
+  +clr
+  height: 70px
+  padding: 0 17px
+  overflow: hidden
+
+  line-height: 70px
+  font-size: 16px
+
+  background-color: $brand-color
+  color: white
+
+.site-logo, .top-search-form, .top-menu, .top-notif, .my-prof
+  float: left
+
+.site-logo
+  margin-right: 20px
+
+.top-search-form
+  position: relative
+  width: 135px
+  margin-top: 25px
+  margin-right: 12px
+
+  line-height: 20px
+
+  .form-input[type="text"]
+    +themed-input
+    width: 100%
+    padding: 2px 10px
+    padding-right: 30px
+
+    font-style: italic
+    font-size: 12px
+
+    background: #355d8a
+    border: 1px solid transparent
+    border-radius: 5px
+
+    +placeholder
+      color: #c3d6ed
+
+  .form-btn
+    +themed-button
+    +hide-text
+    background: transparent
+    +sprite($search)
+    position: absolute
+    top: 50%
+    margin-top: -6px
+    right: 7px
+
+.top-menu
+  > a
+    display: inline-block
+    color: #355d8a
+    padding: 0 10px
+
+    &:hover, &:focus
+      color: #c3d6ed
+      background: #355d8a
+
+.my-prof-container
+  float: right
+  padding-right: 50px
+
+.my-prof-photo
+  > img
+    border-radius: 50%
+    vertical-align: middle
+    margin: 0 14px
+
+.my-prof-name
+  +hover-underline
+
+.top-notif
+  margin-top: 30px
+  line-height: normal
+
+  > a
+    display: inline-block
+    +hide-text
+    margin-left: 17px
+
+.top-notif-msg
+  +sprite($messages)
+
+.top-notif-post
+  +sprite($posts)
+
+.top-notif-remind
+  +sprite($reminders)
+
+
+/*
+  sidebar
+
+.sidebar
+  float: left
+  position: relative
+  z-index: 10
+  width: 200px
+  padding: 10px 0
+  background: #355d8a
+  color: #c3d6ed
+
+.side-menu-item
+  position: relative
+  display: block
+  padding-left: 45px
+
+  font-size: 16px
+  line-height: 39px
+
+  &:hover, &:focus
+    color: white
+    background: #4b75a5
+
+    .side-menu-notif
+      background: #355d8a
+
+.side-menu-notif
+  position: absolute
+  top: 12px
+  right: 20px
+  padding: 0 5px
+  border-radius: 3px
+
+  font-size: 12px
+  line-height: normal
+  color: #c3d6ed
+
+  background: $brand-color
+
+  &:hover, &:focus
+    color: white
+
+.side-menu-item
+  .icon
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    left: 20px
+
+@each $class, $sprite-name in (friends: $icon-friends, photos: $icon-photos, videos: $icon-videos, music: $icon-music, messages: $icon-messages, groups: $icon-groups, news: $icon-news, feedback: $icon-feedback, bookmarks: $icon-bookmarks, settings: $icon-settings, games: $icon-games, documents: $icon-documents, cloud: $icon-cloud)
+  .icon-#{$class}
+    +sprite($sprite-name)
+
+/*
+  page container
+
+.page-container
+  position: relative
+  border-left: 200px solid #355d8a
+  background: #efefef
+
+/*
+  profile header
+
+.profile-head
+  position: relative
+  overflow: hidden
+  color: white
+
+  &:after
+    content: ""
+    position: absolute
+    z-index: 10
+    left: 0
+    bottom: 0
+    +size(100%, 205px)
+
+    background: linear-gradient(to bottom, transparent, rgba(black, .8))
+
+.profile-cover-image
+  display: block
+
+.profile-head-content
+  position: absolute
+  z-index: 20
+  left: 20px
+  right: 0
+  bottom: 20px
+
+  a
+    &:hover, &:focus
+      text-decoration: underline
+
+.miniprof-visible
+  .profile-head-content
+    padding-right: 290px
+
+.profile-head-album-image
+  border-radius: 4px
+  float: left
+  margin-right: 10px
+  margin-top: 5px
+
+.profile-head-status
+  font-size: 24px
+  font-weight: normal
+  margin-bottom: 10px
+  text-align: left
+
+.profile-head-album-note
+  font-size: 12px
+  padding-left: 34px  // head image size + head image padding
+
+.profile-head-album-title
+  font-size: 16px
+  font-weight: bold
+  padding-left: 34px
+
+  > a
+    padding-right: 200px
+
+.profile-head-metabox
+  padding: 0
+  position: absolute
+  right: 20px
+  bottom: -5px
+
+  transition: right 0.3s linear
+
+  .comments
+    float: none
+
+  a
+    &:hover, &:focus
+      text-decoration: none
+
+.miniprof-visible
+  .profile-head-metabox
+    right: 270px + 20px
+
+/*
+  mini profile
+
+.icon-hamburger
+  display: block
+  +sprite($icon-hamburger)
+
+.miniprof-toggle
+  position: absolute
+  z-index: 30
+  top: 20px
+  right: 20px
+
+.miniprof-wrapper
+  position: absolute
+  z-index: 20
+  top: 0
+  right: 0
+  width: 270px
+  overflow: hidden
+  pointer-events: none
+
+.miniprof-visible
+  .miniprof-wrapper
+    pointer-events: all
+
+.miniprof
+  transition: left 0.3s linear
+  position: relative
+  left: 270px
+
+.miniprof-visible .miniprof
+  left: 0
+
+.miniprof-head
+  position: relative
+  text-align: center
+  color: white
+  height: 400px
+  padding: 20px
+
+  // background: rgba(black, .5)
+
+.miniprof-head-background, .miniprof-head-background2
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+.miniprof-head-background
+  z-index: -20
+
+.miniprof-head-background2
+  background: rgba(#22343d, .6)
+  z-index: -10
+
+.miniprof-head-background-image
+  transform: translateX(-930px)
+
+.miniprof-photo
+  display: block
+  margin-top: 10px
+  border-radius: 50%
+
+  > img
+    border-radius: 50%
+
+.prof-name
+  margin-top: 20px
+  font-size: 21px
+  font-weight: normal
+  +hover-underline
+
+.prof-status
+  font-size: 12px
+  font-weight: normal
+  +hover-underline
+
+.miniprof-actions
+  margin-top: 20px
+
+.prof-make-friend, .prof-pm
+  +hide-text
+  display: inline-block
+
+.prof-make-friend
+  +sprite($action-friend)
+  margin-right: 20px
+
+.prof-pm
+  +sprite($action-pm)
+
+.miniprof-photos-container
+  position: absolute
+  bottom: 20px
+
+  h3
+    text-transform: uppercase
+    font-weight: bold
+    font-size: 16px
+    text-align: left
+    margin-bottom: 20px
+    +hover-underline
+
+  .bx-controls
+    position: absolute
+    top: 0
+    right: 0
+    color: rgba(white, .5)
+
+  .bx-next
+    margin-left: 15px
+
+  .bx-prev, .bx-next
+    &:hover, &:focus
+      color: white
+
+.miniprof-photos-slider
+  +semantic-list
+
+  > li
+    border-radius: 5px
+    overflow: hidden
+
+.miniprof-body
+  background: white
+
+  h3
+    margin-bottom: 10px
+
+    text-transform: uppercase
+    font-size: 16px
+
+    color: #83868b
+
+    > a
+      +hover-underline
+
+.miniprof-section
+  position: relative
+  padding: 20px
+
+  border-bottom: 1px solid #efefef
+
+.prof-block-show
+  float: right
+  +hover-underline
+
+  font-style: italic
+  color: #b4b9bb
+
+.miniprof-section-info
+  background: #fafafa
+
+.miniprof-info
+  clear: both
+  margin-bottom: 7px
+  overflow: hidden
+  font-size: 14px
+
+.miniprof-info-title
+  color: #b4b9bb
+
+.miniprof-info-data
+  float: right
+  +hover-underline
+
+.common-friends-list
+  +semantic-list
+
+  text-align: justify
+  +justify-fix
+
+  > li
+    display: inline-block
+
+.common-person-photo
+  display: inline-block
+  position: relative
+
+  > img
+    +circle
+
+  &.online
+    &:after
+      content: ""
+      position: absolute
+      top: 0
+      left: 0
+      +size(10px)
+      border-radius: 50%
+      background-color: #95c571
+
+      border: 2px solid white
+
+.icon-mobile
+  display: inline-block
+  +sprite($icon-mobile)
+
+/*
+  person list
+
+.person-list
+  +semantic-list
+
+.person-entry
+  +clr
+  clear: both
+  margin-bottom: 20px
+
+.person-photo
+  float: left
+  margin-right: 14px
+
+  >img
+    border-radius: 50%
+    vertical-align: middle
+
+.person-right-data
+  float: right
+
+  > span
+    margin-left: 15px
+
+.person-name
+  display: block
+  font-size: 16px
+  font-weight: bold
+  color: $brand-color
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  +hover-underline
+
+.person-online-time
+  color: #b4b9bc
+  font-size: 12px
+  font-style: italic
+
+.friends-switcher
+  float: right
+  font-size: 12px
+  font-style: italic
+  color: #b4b9bb
+
+  > .active
+    font-size: 16px
+    color: $brand-color
+
+.more-button
+  clear: both
+  display: block
+  padding: 10px
+
+  font-size: 12px
+  text-align: center
+
+  background: #efefef
+  color: #b7b7b7
+  border-radius: 5px
+
+  transition: background 0.3s linear
+
+  &:hover, &:focus
+    background: darken(#efefef, 10%)
+
+/*
+  groups
+
+.groups-list
+  +semantic-list
+
+.group
+  padding: 15px 0
+  border-bottom: 1px solid #efefef
+
+  &:last-child
+    border-bottom: none
+
+.group-logo
+  float: left
+  margin-top: 5px
+  margin-right: 15px
+
+.group-title
+  color: $brand-color
+  +hover-underline
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+
+.group-desc
+  color: #a7b0b3
+  font-style: italic
+  font-size: 12px
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+
+/*
+  videos block
+
+.miniprof-section-video
+  background: #fafafa
+  padding-bottom: 0
+
+.miniprof-video-slider
+  +semantic-list
+
+.miniprof-videos-container
+  .bx-controls
+    position: absolute
+    top: 20px
+    right: 20px
+
+    color: #b4b9bb
+
+    .bx-next
+      margin-left: 15px
+
+    .bx-prev, .bx-next
+      &:hover, &:focus
+        color: black
+
+.video-preview
+  position: relative
+  cursor: pointer
+  margin-bottom: 10px
+
+  > img
+    display: block
+
+  &:after
+    content: ""
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    height: 36px
+    background: linear-gradient(to bottom, transparent, rgba(black, .9))
+
+.video-preview-play
+  position: absolute
+  z-index: 10
+  left: 10px
+  bottom: 10px
+  +triangle(10px, 10px, white, 'right')
+
+.video-preview-time
+  position: absolute
+  z-index: 10
+  right: 10px
+  bottom: 10px
+  color: white
+
+  font-size: 12px
+  font-style: italic
+
+.video-desc-title, .video-desc-time
+  display: block
+  font-size: 12px
+
+.video-desc-title
+  +hover-underline
+
+.video-desc-time
+  color: #b4b9bc
+  font-style: italic
+
+.video-meta
+  margin-top: 15px
+  border-top: 1px solid lightgray
+
+/*
+  miniprofile music section
+
+.miniprof-music-list
+  > li
+    +clr
+    margin-bottom: 20px
+    clear: both
+
+.music-play
+  float: left
+  position: relative
+  +size(28px)
+  margin-right: 5px
+  background: $brand-color
+  border-radius: 3px
+  display: inline-block
+  vertical-align: middle
+  +hide-text
+
+  &:hover, &:focus
+    background: lighten($brand-color, 10%)
+
+  &:after
+    content: ""
+    position: absolute
+    top: 9px
+    left: 10px
+    +triangle(10px, 10px, white, right)
+
+.music-title
+  display: block
+  font-size: 16px
+  font-weight: bold
+  color: $brand-color
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  +hover-underline
+
+.music-dur
+  float: right
+  color: #b4b9bc
+  font-size: 12px
+  font-style: italic
+
+/*
+  tools block
+
+.miniprof-section-tools
+  padding-bottom: 20px
+
+.miniprof-tool
+  color: $brand-color
+  line-height: 2em
+  font-size: 12px
+  +hover-underline
+
+/*
+  main content section
+
+.main-content
+  transition: padding-right 0.3s linear
+
+.miniprof-visible
+  .main-content
+    padding-right: 270px
+
+/*
+  post on wall form
+
+.icon-attachment
+  +sprite($icon-attachment)
+
+.icon-emot
+  +sprite($icon-emot)
+
+.wall-post-form
+  margin: 2%
+  padding: 20px
+  background: white
+  border-radius: 4px
+
+.wall-post-input-wrapper
+  position: relative
+  margin-right: 110px
+  border-radius: 3px
+
+.wall-post-input
+  +themed-input
+  border: 1px solid lightgray
+  border-radius: 4px
+  width: 100%
+  padding: 10px
+  font-size: 12px
+  color: gray
+  resize: vertical
+  height: 40px
+  min-height: 40px
+  max-height: 300px
+
+  transition: height 0.2s linear
+
+  &:focus
+    height: 130px
+
+  &:hover, &:focus
+    border-color: lightblue
+
+  &:focus
+    box-shadow: 0 0 0 1px lightblue
+
+  +placeholder
+    color: #b4b9bc
+    font-style: italic
+
+.wall-post-send
+  float: right
+
+.wall-post-send
+  +themed-button
+  padding: 10px 30px
+  margin-left: 15px
+  background: $brand-color
+  border-radius: 4px
+  color: white
+  font-weight: bold
+  font-size: 12px
+
+  &:hover, &:focus
+    background: lighten($brand-color, 10%)
+
+.wall-post-attach
+  position: absolute
+  top: 10px
+  right: 50px
+
+  background-repeat: no-repeat
+  padding-right: 10px
+  border-right: 1px solid lightgray
+
+.wall-post-emot
+  position: absolute
+  top: 10px
+  right: 20px
+
+.icon-attachment, .icon-emot
+  display: inline-block
+
+.icon-attachment
+  +sprite($icon-attachment)
+
+.icon-emot
+  +sprite($icon-emot)
+
+/*
+  feed
+
+.feed-wrapper
+  padding: 0 2%
+
+.post
+  +clr
+  z-index: 1 // see .post-reposted-content::after rule
+  float: left
+  margin-bottom: 20px
+  padding-bottom: 0
+  background: white
+  border-radius: 4px
+  color: #5a5a5a
+
+.post-padding
+  padding: 20px
+  padding-bottom: 0
+
+.post-reposted-padding
+  padding: 0 40px
+
+.post-gutter
+  height: 0
+
+=three-column-feed
+  $gutter: 2.0%
+  $narrow: (100% - 2 * $gutter) / 3
+  $wide: 2 * $narrow + $gutter
+  $image-width-wide: (($wide + 2 * $gutter / 3) * 100%) / $wide
+  $image-width-narrow: (($narrow + 2 * $gutter / 3) * 100%) / $narrow
+  $image-margin-wide: (($image-width-wide - 100%) / 2 * 100%) / $image-width-wide
+  $image-margin-narrow: (($image-width-narrow - 100%) / 2 * 100%) / $image-width-narrow
+
+  .post-wide
+    width: $wide
+
+  .post-narrow
+    width: $narrow
+
+  .post-gutter
+    width: $gutter
+
+  .post-wide
+    .post-images
+      > img
+        width: $image-width-wide
+        margin-left: -$image-margin-wide
+
+  .post-narrow
+    .post-images
+      > img
+        width: $image-width-narrow
+        margin-left: -$image-margin-narrow
+
+=four-column-feed
+  $gutter: 2.0%
+  $narrow: (100% - 3 * $gutter) / 4
+  $wide: 2 * $narrow + $gutter
+  $image-width-wide: (($wide + 2 * $gutter / 3) * 100%) / $wide
+  $image-width-narrow: (($narrow + 2 * $gutter / 3) * 100%) / $narrow
+  $image-margin-wide: (($image-width-wide - 100%) / 2 * 100%) / $image-width-wide
+  $image-margin-narrow: (($image-width-narrow - 100%) / 2 * 100%) / $image-width-narrow
+
+  .post-wide
+    width: $wide
+
+  .post-narrow
+    width: $narrow
+
+  .post-gutter
+    width: $gutter
+
+  .post-wide
+    .post-images
+      > img
+        width: $image-width-wide
+        margin-left: -$image-margin-wide
+
+  .post-narrow
+    .post-images
+      > img
+        width: $image-width-narrow
+        margin-left: -$image-margin-narrow
+
+=one-column-feed
+  .post-wide, .post-narrow
+    width: 100%
+
+  .post-gutter
+    width: 0
+
+  .post-images
+    > img
+      width: 100%
+
+@media (min-width: 1400px)
+  +four-column-feed
+
+  .miniprof-visible
+    +three-column-feed
+
+@media (min-width: 1000px) and (max-width: 1399px)
+  +three-column-feed
+
+@media (max-width: 999px)
+  +one-column-feed
+
+  .miniprof-visible
+    +one-column-feed
+
+.post-author-group
+  .post-author-image
+    > img
+      border-radius: 0
+
+.post-author-image
+  margin-right: 10px
+  float: left
+
+  > img
+    +circle
+    vertical-align: middle
+
+.post-author
+  display: block
+  margin-right: 10px
+  color: $brand-color
+  font-weight: bold
+  +hover-underline
+
+  line-height: 32px
+
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.post-text
+  margin-top: 20px
+  border-top: 1px solid lightgray
+  padding-top: 20px
+  padding-bottom: 20px
+
+  color: #5a5a5a
+  font-size: 14px
+
+  p
+    margin: 5px 0
+
+.post-own-text
+  @extend .post-text
+
+.post-time
+  float: right
+  font-size: 12px
+  color: #b4b9bc
+  line-height: 32px
+
+.post-meta
+  padding-top: 0
+  border-bottom: 1px solid lightgray
+  margin-bottom: 20px
+
+  .comments
+    position: relative
+
+    &.active
+      &:after
+        content: ""
+        position: absolute
+        height: 2px
+        width: 100%
+        background: $brand-color
+        bottom: -21px
+        left: 0
+
+.comment-author-image
+  @extend .post-author-image
+
+.comment-author
+  @extend .post-author
+
+.comment-meta
+  float: right
+  font-size: 12px
+
+  .likes
+    .icon
+      margin-right: 2px
+      vertical-align: middle
+
+.comment-time
+  @extend .post-time
+  float: none
+  margin-right: 5px
+
+.comment-content
+  clear: both
+  padding-left: 42px
+  color: #a1a9ae
+  font-size: 12px
+
+.ext-link-block
+  +clr
+  margin-top: 20px
+  border: 1px solid lightgray
+  border-radius: 4px
+  padding: 20px
+
+  font-size: 14px
+  line-height: 18px
+
+.ext-link-image
+  float: left
+  margin-right: 20px
+  max-width: 100%
+
+  > img
+    max-width: 100%
+    height: auto
+
+.ext-link-title
+  display: block
+  color: $brand-color
+  font-weight: bold
+
+.ext-link-desc
+  margin-top: 14px
+  font-size: 12px
+
+.ext-link
+  display: block
+  margin-top: 16px
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+  > a
+    color: #0083e4
+    +hover-underline
+
+=ext-link-narrow
+  .ext-link-image
+    float: none
+
+  .ext-link-title, .ext-link-desc, .ext-link
+    height: auto
+    margin-top: 15px
+
+.post-narrow
+  +ext-link-narrow
+
+@media (max-width: 970px)
+  .miniprof-visible
+    +ext-link-narrow
+
+@media (max-width: 700px)
+  +ext-link-narrow
+
+.post-comments
+  padding-bottom: 20px
+
+.post-comment-form
+  background: #fafafa
+  padding: 20px
+  margin: 0 -20px
+  border-bottom-left-radius: 4px
+  border-bottom-right-radius: 4px
+
+.post-comment-input
+  +themed-input
+  border: 1px solid lightgray
+  border-radius: 4px
+  width: 100%
+  padding: 10px
+  font-size: 12px
+  color: gray
+
+  &:hover, &:focus
+    border-color: lightblue
+
+  &:focus
+    box-shadow: 0 0 0 1px lightblue
+
+.post-reposted-content
+  position: relative
+  padding: 20px 0
+
+  &:after
+    content: ""
+    position: absolute
+    z-index: -10
+    top: 0
+    left: 20px
+    right: 20px
+    bottom: 0
+    border: 1px solid lightgray
+    border-radius: 4px
+
+.post-images
+  > img
+    height: auto
+    box-shadow: 0 0 1px 1px lightgray
+
